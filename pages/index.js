@@ -11,6 +11,7 @@ import {
   Modal,
   Typography,
 } from "@mui/material";
+import ModalInside from "../components/ModalInside"
 import { Box } from "@mui/system";
 
 export async function getServerSideProps() {
@@ -48,26 +49,7 @@ export default function Home(props) {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <Card
-            sx={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%, -50%)",
-              p: 4,
-            }}
-          >
-            <CardContent>
-              <Typography id="modal-modal-title" variant="h6" component="h2">
-                Feel free to submit in me 😉
-              </Typography>
-            </CardContent>
-            <CardActions sx={{alignItems: "right"}}>
-              <Button>
-                😛
-              </Button>
-            </CardActions>
-          </Card>
+          <ModalInside />
         </Modal>
         {props.post_table.map((item) => {
           return (
