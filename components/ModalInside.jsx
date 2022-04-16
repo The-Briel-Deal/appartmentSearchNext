@@ -8,10 +8,22 @@ import {
   Typography,
 } from "@mui/material";
 import { useState } from "react";
-
+import axios from "axios";
 export default function Home(props) {
   const [title, setTitle] = useState('')
   const [content, setContent] = useState('')
+  const submitPost = ()=>{
+      axios.post('/api/newPost', {title: title, content: content}).then((resp)=>{
+          console.log(resp)
+          setTitle('')
+          setContent('')
+          props.setOpen(false)
+          axios.get('/api/getPost').then((resp)=>{
+              console.log(resp)
+              props.setPostTable(resp.data)
+          })
+      })
+  }
   return (
     <Card
       outline
@@ -49,7 +61,7 @@ export default function Home(props) {
         </Grid>
       </CardContent>
       <CardActions sx={{ alignItems: "right" }}>
-        <Button variant="outlined">😛</Button>
+        <Button onClick={submitPost} variant="outlined">😛</Button>
       </CardActions>
     </Card>
   );

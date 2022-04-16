@@ -30,6 +30,7 @@ export async function getServerSideProps() {
 
 export default function Home(props) {
   const [open, setOpen] = React.useState(false);
+  const [postTable, setPostTable] = React.useState(props.post_table);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   return (
@@ -49,9 +50,12 @@ export default function Home(props) {
           aria-labelledby="modal-modal-title"
           aria-describedby="modal-modal-description"
         >
-          <ModalInside />
+          <ModalInside
+            setPostTable={setPostTable}
+            setOpen={setOpen}
+          />
         </Modal>
-        {props.post_table.map((item) => {
+        {postTable.map((item) => {
           return (
             <Card key={item.id} sx={{ my: 3, width: 600 }}>
               <CardContent>
